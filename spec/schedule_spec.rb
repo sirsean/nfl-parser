@@ -1,13 +1,31 @@
-require 'spec_helper'
+require "spec_helper"
 
-describe NflParser::Parse do
+describe NflParser::Parse::ScheduleParser do
     before :each do
-        @game_final = TestFixtures::GAME_FINAL
+        @schedule_week_12 = TestFixtures::SCHEDULE_WEEK_12
     end
 
-    it "parses a game, final" do
-        parser = NflParser::Parse::GameParser.new
-        game = parser.parse(@game_final)
+    it "gets the current/previous/next weeks" do
+        parser = NflParser::Parse::ScheduleParser.new
+        schedule = parser.parse(@schedule_week_12)
+
+        schedule.week.current.week.should == 12
+        schedule.week.previous.week.should == 11
+        schedule.week.next.week.should == 13
+    end
+
+    it "gets the right number of games" do
+        parser = NflParser::Parse::ScheduleParser.new
+        schedule = parser.parse(@schedule_week_12)
+
+        schedule.games.size.should == 16
+    end
+
+    it "gets the first game" do
+        parser = NflParser::Parse::ScheduleParser.new
+        schedule = parser.parse(@schedule_week_12)
+
+        game = schedule.games[0]
         game.game_id.should == "2011112400"
         game.label.should == "GB @ DET"
         game.game_clock.should == ":00"
@@ -50,33 +68,6 @@ describe NflParser::Parse do
         game.home_ot_score.should == 0
         game.home_team_timeouts_remaining.should == 0
         game.home_team_record.should == "7-4-0"
-    end
-
-    it "parses all the fields out of the team" do
-        parser = NflParser::Parse::GameParser.new
-        game = parser.parse(@game_final)
-
-        game.away_team.team_id.should == "1800"
-        game.away_team.name.should == "Green Bay Packers"
-        game.away_team.nickname.should == "Packers"
-        game.away_team.abbreviation.should == "GB"
-        game.away_team.city.should == "Green Bay"
-        game.away_team.conference.should == "NFC"
-        game.away_team.division.should == "North"
-        game.away_team.image_url.should == "http://s3.amazonaws.com/nflgc-images/ws/team_icons/icon_team_gb.png"
-        game.away_team.draft_needs.should == ["DL","LB","OL","CB","RB"]
-
-        game.home_team.team_id.should == "1540"
-        game.home_team.name.should == "Detroit Lions"
-        game.home_team.nickname.should == "Lions"
-        game.home_team.abbreviation.should == "DET"
-        game.home_team.city.should == "Detroit"
-        game.home_team.conference.should == "NFC"
-        game.home_team.division.should == "North"
-        game.home_team.image_url.should == "http://s3.amazonaws.com/nflgc-images/ws/team_icons/icon_team_det.png"
-        game.home_team.draft_needs.should == ["CB","LB","S","OL","RB","WR"]
-
-        game.winner.team_id.should == game.away_team.team_id
     end
 
 end

@@ -79,4 +79,9 @@ describe NflParser::Parse::GameParser do
         game.winner.team_id.should == game.away_team.team_id
     end
 
+    it "builds a team with no draft needs" do
+        team = NflParser::Team.new({})
+        team.draft_needs.should == []
+    end
+
 end

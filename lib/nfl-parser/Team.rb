@@ -11,7 +11,11 @@ module NflParser
             @conference = parsed["conference"]
             @division = parsed["division"]
             @image_url = parsed["imageUrl"]
-            @draft_needs = parsed["draftNeeds"].split(",")
+            if parsed.has_key?("draftNeeds") and not parsed["draftNeeds"].nil?
+                @draft_needs = parsed["draftNeeds"].split(",")
+            else
+                @draft_needs = []
+            end
         end
     end
 end

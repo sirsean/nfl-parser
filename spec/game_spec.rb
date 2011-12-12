@@ -1,12 +1,12 @@
 require 'spec_helper'
 
-describe NflParser::Parse::GameParser do
+describe NFL::Parse::GameParser do
     before :each do
         @game_final = TestFixtures::GAME_FINAL
     end
 
     it "parses a game, final" do
-        parser = NflParser::Parse::GameParser.new
+        parser = NFL::Parse::GameParser.new
         game = parser.parse(@game_final)
         game.game_id.should == "2011112400"
         game.label.should == "GB @ DET"
@@ -53,7 +53,7 @@ describe NflParser::Parse::GameParser do
     end
 
     it "parses all the fields out of the team" do
-        parser = NflParser::Parse::GameParser.new
+        parser = NFL::Parse::GameParser.new
         game = parser.parse(@game_final)
 
         game.away_team.team_id.should == "1800"
@@ -80,7 +80,7 @@ describe NflParser::Parse::GameParser do
     end
 
     it "builds a team with no draft needs" do
-        team = NflParser::Team.new({})
+        team = NFL::Team.new({})
         team.draft_needs.should == []
     end
 

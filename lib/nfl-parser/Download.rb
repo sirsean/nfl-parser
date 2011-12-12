@@ -1,7 +1,7 @@
 require "net/http"
 require "uri"
 
-module NflParser
+module NFL
     module Download
         class DownloaderBase
             def download

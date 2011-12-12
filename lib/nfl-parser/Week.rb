@@ -1,11 +1,11 @@
-module NflParser
+module NFL
     class AllWeeks
         attr_reader :current, :weeks
 
         def initialize(parsed)
-            @current = NflParser::Week.new(parsed["current"])
+            @current = NFL::Week.new(parsed["current"])
             @weeks = parsed["content"].map do |week|
-                NflParser::Week.new(week)
+                NFL::Week.new(week)
             end
         end
     end

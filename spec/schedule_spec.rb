@@ -1,12 +1,12 @@
 require "spec_helper"
 
-describe NflParser::Parse::ScheduleParser do
+describe NFL::Parse::ScheduleParser do
     before :each do
         @schedule_week_12 = TestFixtures::SCHEDULE_WEEK_12
     end
 
     it "gets the current/previous/next weeks" do
-        parser = NflParser::Parse::ScheduleParser.new
+        parser = NFL::Parse::ScheduleParser.new
         schedule = parser.parse(@schedule_week_12)
 
         schedule.week.current.week.should == 12
@@ -15,14 +15,14 @@ describe NflParser::Parse::ScheduleParser do
     end
 
     it "gets the right number of games" do
-        parser = NflParser::Parse::ScheduleParser.new
+        parser = NFL::Parse::ScheduleParser.new
         schedule = parser.parse(@schedule_week_12)
 
         schedule.games.size.should == 16
     end
 
     it "gets the first game" do
-        parser = NflParser::Parse::ScheduleParser.new
+        parser = NFL::Parse::ScheduleParser.new
         schedule = parser.parse(@schedule_week_12)
 
         game = schedule.games[0]

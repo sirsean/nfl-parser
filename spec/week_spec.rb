@@ -1,12 +1,12 @@
 require 'spec_helper'
 
-describe NflParser::Parse::AllWeeksParser do
+describe NFL::Parse::AllWeeksParser do
     before :each do
         @all_weeks_14 = TestFixtures::ALL_WEEKS_14
     end
 
     it "gets the current week" do
-        parser = NflParser::Parse::AllWeeksParser.new
+        parser = NFL::Parse::AllWeeksParser.new
         all_weeks = parser.parse(@all_weeks_14)
 
         all_weeks.current.season.should == 2011
@@ -16,7 +16,7 @@ describe NflParser::Parse::AllWeeksParser do
     end
 
     it "gets all the weeks" do
-        parser = NflParser::Parse::AllWeeksParser.new
+        parser = NFL::Parse::AllWeeksParser.new
         all_weeks = parser.parse(@all_weeks_14)
 
         all_weeks.weeks.size.should == 17
@@ -25,7 +25,7 @@ describe NflParser::Parse::AllWeeksParser do
     end
 
     it "correctly compares the current week" do
-        parser = NflParser::Parse::AllWeeksParser.new
+        parser = NFL::Parse::AllWeeksParser.new
         all_weeks = parser.parse(@all_weeks_14)
 
         all_weeks.current.should == all_weeks.weeks[13]

@@ -3,7 +3,7 @@ require "nfl-parser/version"
 
 spec = Gem::Specification.new do |s|
   s.name = 'nfl-parser'
-  s.version = NflParser::VERSION
+  s.version = NFL::VERSION
   s.platform = Gem::Platform::RUBY
   s.has_rdoc = false
   s.summary = "Parse the NFL API"

@@ -19,7 +19,7 @@ end
 
 desc 'Install gem'
 task :gem_install do
-	puts `gem install nfl-parser-#{NflParser::VERSION}.gem`
+	puts `gem install nfl-parser-#{NFL::VERSION}.gem`
 end
 
 desc 'Uninstall gem'

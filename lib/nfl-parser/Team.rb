@@ -1,4 +1,4 @@
-module NflParser
+module NFL
     class Team
         attr_reader :team_id, :name, :nickname, :abbreviation, :city, :conference, :division, :image_url, :draft_needs
 

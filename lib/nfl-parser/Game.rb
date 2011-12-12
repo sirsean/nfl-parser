@@ -1,4 +1,4 @@
-module NflParser
+module NFL
     class Game
         attr_reader :game_id, :label, :game_clock, :season_type, :stadium, :status, :tv_network
         attr_reader :inside_twenty, :is_final, :is_halftime, :is_in_progress, :is_pre_game, :period_count, :season, :week_number, :crossed_redzone, :has_just_scored
@@ -32,8 +32,8 @@ module NflParser
             @weather = parsed["weather"]
             @temperatures = parsed["temperatures"]
             @conditions = parsed["conditions"]
-            @winner = NflParser::Team.new(parsed["winner"])
-            @away_team = NflParser::Team.new(parsed["awayTeam"])
+            @winner = NFL::Team.new(parsed["winner"])
+            @away_team = NFL::Team.new(parsed["awayTeam"])
             @away_score = parsed["awayScore"]
             @away_q1_score = parsed["awayQ1Score"]
             @away_q2_score = parsed["awayQ2Score"]
@@ -42,7 +42,7 @@ module NflParser
             @away_ot_score = parsed["awayOtScore"]
             @away_team_timeouts_remaining = parsed["awayTeamTimeoutsRemaining"]
             @away_team_record = parsed["awayTeamRecord"]
-            @home_team = NflParser::Team.new(parsed["homeTeam"])
+            @home_team = NFL::Team.new(parsed["homeTeam"])
             @home_score = parsed["homeScore"]
             @home_q1_score = parsed["homeQ1Score"]
             @home_q2_score = parsed["homeQ2Score"]

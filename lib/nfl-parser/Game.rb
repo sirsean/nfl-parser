@@ -6,7 +6,9 @@ module NFL
         attr_reader :weather, :temperatures, :conditions
         attr_reader :winner
         attr_reader :away_team, :away_score, :away_q1_score, :away_q2_score, :away_q3_score, :away_q4_score, :away_ot_score, :away_team_timeouts_remaining, :away_team_record
+        attr_reader :away_team_wins, :away_team_losses, :away_team_ties
         attr_reader :home_team, :home_score, :home_q1_score, :home_q2_score, :home_q3_score, :home_q4_score, :home_ot_score, :home_team_timeouts_remaining, :home_team_record
+        attr_reader :home_team_wins, :home_team_losses, :home_team_ties
 
         def initialize(parsed)
             @game_id = parsed["id"]
@@ -42,6 +44,9 @@ module NFL
             @away_ot_score = parsed["awayOtScore"]
             @away_team_timeouts_remaining = parsed["awayTeamTimeoutsRemaining"]
             @away_team_record = parsed["awayTeamRecord"]
+            @away_team_wins = parsed["awayTeamRecord"].split('-')[0].to_i
+            @away_team_losses = parsed["awayTeamRecord"].split('-')[1].to_i
+            @away_team_ties = parsed["awayTeamRecord"].split('-')[2].to_i
             @home_team = NFL::Team.new(parsed["homeTeam"])
             @home_score = parsed["homeScore"]
             @home_q1_score = parsed["homeQ1Score"]
@@ -51,6 +56,9 @@ module NFL
             @home_ot_score = parsed["homeOtScore"]
             @home_team_timeouts_remaining = parsed["homeTeamTimeoutsRemaining"]
             @home_team_record = parsed["homeTeamRecord"]
+            @home_team_wins = parsed["homeTeamRecord"].split('-')[0].to_i
+            @home_team_losses = parsed["homeTeamRecord"].split('-')[1].to_i
+            @home_team_ties = parsed["homeTeamRecord"].split('-')[2].to_i
         end
     end
 end

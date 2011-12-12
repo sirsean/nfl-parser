@@ -41,6 +41,9 @@ describe NFL::Parse::GameParser do
         game.away_ot_score.should == 0
         game.away_team_timeouts_remaining.should == 3
         game.away_team_record.should == "11-0-0"
+        game.away_team_wins.should == 11
+        game.away_team_losses.should == 0
+        game.away_team_ties.should == 0
         game.home_team.name.should == "Detroit Lions"
         game.home_score.should == 15
         game.home_q1_score.should == 0
@@ -50,6 +53,9 @@ describe NFL::Parse::GameParser do
         game.home_ot_score.should == 0
         game.home_team_timeouts_remaining.should == 0
         game.home_team_record.should == "7-4-0"
+        game.home_team_wins.should == 7
+        game.home_team_losses.should == 4
+        game.home_team_ties.should == 0
     end
 
     it "parses all the fields out of the team" do

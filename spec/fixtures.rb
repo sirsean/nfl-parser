@@ -14,4 +14,5 @@ module TestFixtures
 
     SCHEDULE_WEEK_12 = read_fixture("week_reg_12_schedule.past.js")
     SCHEDULE_WEEK_14 = read_fixture("week_reg_14_schedule.in-progress.js")
+    SCHEDULE_WEEK_15 = read_fixture("week_reg_15_schedule.future.js")
 end

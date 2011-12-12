@@ -4,6 +4,7 @@ describe NFL::Parse::ScheduleParser do
     before :each do
         @schedule_week_12 = TestFixtures::SCHEDULE_WEEK_12
         @schedule_week_14 = TestFixtures::SCHEDULE_WEEK_14
+        @schedule_week_15 = TestFixtures::SCHEDULE_WEEK_15
     end
 
     context "past week" do
@@ -74,6 +75,15 @@ describe NFL::Parse::ScheduleParser do
     end
 
     context "current week" do
+        it "gets the current/previous/next weeks" do
+            parser = NFL::Parse::ScheduleParser.new
+            schedule = parser.parse(@schedule_week_14)
+
+            schedule.week.current.week.should == 14
+            schedule.week.previous.week.should == 13
+            schedule.week.next.week.should == 15
+        end
+
         it "gets the right number of games" do
             parser = NFL::Parse::ScheduleParser.new
             schedule = parser.parse(@schedule_week_14)
@@ -92,6 +102,24 @@ describe NFL::Parse::ScheduleParser do
 
             game.away_score.should == 2
             game.home_score.should == 0
+        end
+    end
+
+    context "future week" do
+        it "gets the current/previous/next weeks" do
+            parser = NFL::Parse::ScheduleParser.new
+            schedule = parser.parse(@schedule_week_15)
+
+            schedule.week.current.week.should == 15
+            schedule.week.previous.week.should == 14
+            schedule.week.next.week.should == 16
+        end
+
+        it "gets the right number of games" do
+            parser = NFL::Parse::ScheduleParser.new
+            schedule = parser.parse(@schedule_week_15)
+
+            schedule.games.size.should == 16
         end
     end
 

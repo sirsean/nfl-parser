@@ -11,20 +11,22 @@ RSpec::Core::RakeTask.new(:rcov) do |t|
 	t.rcov = true
 end
 
-desc 'Build the gem'
-task :gem_build do
-	puts `yard`
-	puts `gem build nfl-parser.gemspec`
-end
+namespace :gem do
+    desc 'Build the gem'
+    task :build do
+        puts `yard`
+        puts `gem build nfl-parser.gemspec`
+    end
 
-desc 'Install gem'
-task :gem_install do
-	puts `gem install nfl-parser-#{NFL::VERSION}.gem`
-end
+    desc 'Install gem'
+    task :install do
+        puts `gem install nfl-parser-#{NFL::VERSION}.gem`
+    end
 
-desc 'Uninstall gem'
-task :gem_uninstall do
-	puts `gem uninstall nfl-parser`
+    desc 'Uninstall gem'
+    task :uninstall do
+        puts `gem uninstall nfl-parser`
+    end
 end
 
 desc 'Build yard documentation'

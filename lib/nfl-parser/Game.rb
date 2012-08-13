@@ -44,10 +44,12 @@ module NFL
             @away_ot_score = parsed["awayOtScore"]
             @away_team_timeouts_remaining = parsed["awayTeamTimeoutsRemaining"]
             @away_team_record = parsed["awayTeamRecord"]
-            away_team_record_split = parsed["awayTeamRecord"].split('-')
-            @away_team_wins = away_team_record_split[0].to_i
-            @away_team_losses = away_team_record_split[1].to_i
-            @away_team_ties = away_team_record_split[2].to_i
+            if parsed["awayTeamRecord"]
+                away_team_record_split = parsed["awayTeamRecord"].split('-')
+                @away_team_wins = away_team_record_split[0].to_i
+                @away_team_losses = away_team_record_split[1].to_i
+                @away_team_ties = away_team_record_split[2].to_i
+            end
             @home_team = NFL::Team.new(parsed["homeTeam"])
             @home_score = parsed["homeScore"]
             @home_q1_score = parsed["homeQ1Score"]
@@ -57,10 +59,12 @@ module NFL
             @home_ot_score = parsed["homeOtScore"]
             @home_team_timeouts_remaining = parsed["homeTeamTimeoutsRemaining"]
             @home_team_record = parsed["homeTeamRecord"]
-            home_team_record_split = parsed["homeTeamRecord"].split('-')
-            @home_team_wins = home_team_record_split[0].to_i
-            @home_team_losses = home_team_record_split[1].to_i
-            @home_team_ties = home_team_record_split[2].to_i
+            if parsed["homeTeamRecord"]
+                home_team_record_split = parsed["homeTeamRecord"].split('-')
+                @home_team_wins = home_team_record_split[0].to_i
+                @home_team_losses = home_team_record_split[1].to_i
+                @home_team_ties = home_team_record_split[2].to_i
+            end
         end
     end
 end

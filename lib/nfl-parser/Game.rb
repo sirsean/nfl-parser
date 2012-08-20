@@ -1,9 +1,10 @@
 module NFL
     class Game
-        attr_reader :game_id, :label, :game_clock, :season_type, :stadium, :status, :tv_network
+        attr_reader :game_id, :label, :game_clock, :quarter, :season_type, :stadium, :status, :tv_network
         attr_reader :inside_twenty, :is_final, :is_halftime, :is_in_progress, :is_pre_game, :period_count, :season, :week_number, :crossed_redzone, :has_just_scored
         attr_reader :datetime, :datetime_date, :datetime_time
         attr_reader :weather, :temperatures, :conditions
+        attr_reader :possession_team
         attr_reader :winner
         attr_reader :away_team, :away_score, :away_q1_score, :away_q2_score, :away_q3_score, :away_q4_score, :away_ot_score, :away_team_timeouts_remaining, :away_team_record
         attr_reader :away_team_wins, :away_team_losses, :away_team_ties
@@ -14,6 +15,7 @@ module NFL
             @game_id = parsed["id"]
             @label = parsed["label"]
             @game_clock = parsed["gameClock"]
+            @quarter = parsed["quarter"]
             @season_type = parsed["seasonType"]
             @stadium = parsed["stadium"]
             @status = parsed["status"]
@@ -34,6 +36,7 @@ module NFL
             @weather = parsed["weather"]
             @temperatures = parsed["temperatures"]
             @conditions = parsed["conditions"]
+            @possession_team = NFL::Team.new(parsed["possessionTeam"])
             @winner = NFL::Team.new(parsed["winner"])
             @away_team = NFL::Team.new(parsed["awayTeam"])
             @away_score = parsed["awayScore"]
